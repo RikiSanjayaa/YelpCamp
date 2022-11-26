@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config()
 }
+// require('dotenv').config()
 
 const express = require('express');
 const path = require('path');
@@ -27,12 +28,27 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 // const dbUrl = process.env.DB_URL
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'
 // 'mongodb://localhost:27017/yelp-camp'
-mongoose.connect(dbUrl, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-});
+
+// mongoose.connect(dbUrl, {
+//     useNewUrlParser: true,
+//     useCreateIndex: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false
+// });
+const connectDB = async () => {
+    try {
+      const conn = await mongoose.connect(dbUrl, {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
+      });
+      console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+      console.log(error);
+      process.exit(1);
+    }
+  }
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -159,6 +175,8 @@ app.use((err, req, res, next) => {
 })
 
 const port = process.env.PORT || 3000
-app.listen(port, () => {
-    console.log(`Serving on port ${port}`)
+connectDB().then(() => {
+    app.listen(port, () => {
+        console.log(`Serving on port ${port}`)
+    })
 })
