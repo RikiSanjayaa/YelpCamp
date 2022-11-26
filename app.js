@@ -26,7 +26,7 @@ const MongoDBStore = require('connect-mongodb-session')(session)
 
 
 // const dbUrl = process.env.DB_URL
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'
+const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/yelp-camp'
 // 'mongodb://localhost:27017/yelp-camp'
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
@@ -43,7 +43,7 @@ db.once("open", () => {
 
 const app = express();
 
-app.engine('ejs',ejsMate)
+app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
@@ -51,7 +51,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(mongoSanitize({
-    replaceWith:'_'
+    replaceWith: '_'
 }))
 
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!'
@@ -135,8 +135,8 @@ app.use((req, res, next) => {
     next()
 })
 
-app.get('/fakeUser', async(req, res) => {
-    const user = new User({ email:'sanjayaaa@gmail.com', username:'riki'})
+app.get('/fakeUser', async (req, res) => {
+    const user = new User({ email: 'sanjayaaa@gmail.com', username: 'riki' })
     const newUser = await User.register(user, '1717')
     res.send(newUser)
 })
@@ -154,8 +154,8 @@ app.all('*', (req, res, next) => {
 })
 
 app.use((err, req, res, next) => {
-    const { statusCode = 500} = err
-    if(!err.message) err.message = 'Oh No, Something Went Wrong!'
+    const { statusCode = 500 } = err
+    if (!err.message) err.message = 'Oh No, Something Went Wrong!'
     res.status(statusCode).render('error', { err })
 })
 
