@@ -6,7 +6,7 @@
     <title>YelpCamp</title>
     <link
       rel="shortcut icon"
-      href="https://rikisyelpcamp.cyclic.app/YelpCamp%20logo.png"
+      href="/images/YelpCamp logo.png"
       type="image/png"
     />
     <!-- CSS only -->
@@ -19,40 +19,51 @@
     <link rel="stylesheet" href="/stlesheets/home.css" />
   </head>
 
-  <body class="d-flex text-center text-white bg-dark">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <header class="mb-auto">
-        <div>
-          <h3 class="float-start mb-0">YelpCamp</h3>
-          <nav class="nav nav-masthead justify-content-center float-end">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-            <a class="nav-link" href="/campgrounds">Campgrounds</a>
-            <% if(!currentUser) { %>
-            <a class="nav-link" href="/login">Login</a>
-            <a class="nav-link" href="/register">Register</a>
-            <% } else { %>
-            <a class="nav-link" href="/logout">Logout</a>
-            <% } %>
-          </nav>
-        </div>
-      </header>
-      <main class="px-3">
-        <h1 class="mb-4">YelpCamp</h1>
-        <p class="lead">
-          Welcome to YelpCamp! <br />
-          Jump right in and explore our many campgrounds. <br />
-          Feel free to share some of your own and comment on others!
-        </p>
-        <a
-          href="/campgrounds"
-          class="btn btn-lg btn-secondary font-weight-bold mt-4"
-          >View Campgrounds</a
-        >
-      </main>
+  <body>
+    <div
+      class="inner-body justify-content-center d-flex text-center text-white"
+    >
+      <div class="d-flex p-3 flex-column">
+        <header class="mb-auto">
+          <div class="width">
+            <h3 class="float-start mb-0">YelpCamp</h3>
+            <nav class="nav nav-masthead justify-content-center float-end">
+              <a
+                class="nav-link active d-none d-md-block"
+                aria-current="page"
+                href="#"
+                >Home</a
+              >
+              <a class="nav-link d-none d-md-block" href="/campgrounds"
+                >Campgrounds</a
+              >
+              <% if(!currentUser) { %>
+              <a class="nav-link" href="/login">Login</a>
+              <a class="nav-link" href="/register">Register</a>
+              <% } else { %>
+              <a class="nav-link" href="/logout">Logout</a>
+              <% } %>
+            </nav>
+          </div>
+        </header>
+        <main class="px-3">
+          <h1 class="mb-4">YelpCamp</h1>
+          <p class="lead">
+            Welcome to YelpCamp! <br />
+            Jump right in and explore our many campgrounds. <br />
+            Feel free to share some of your own and comment on others!
+          </p>
+          <a
+            href="/campgrounds"
+            class="btn btn-lg btn-secondary font-weight-bold mt-4"
+            >View Campgrounds</a
+          >
+        </main>
 
-      <footer class="mt-auto text-white-50">
-        <p>&copy; 2022 YelpCamp</p>
-      </footer>
+        <footer class="mt-auto text-white-50">
+          <p>&copy; 2022 YelpCamp</p>
+        </footer>
+      </div>
     </div>
 
     <script
