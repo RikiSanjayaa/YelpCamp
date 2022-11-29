@@ -20,7 +20,7 @@
   </head>
 
   <body>
-    <div
+    <!-- <div
       class="inner-body justify-content-center d-flex text-center text-white"
     >
       <div class="d-flex p-3 flex-column">
@@ -61,6 +61,46 @@
         </main>
 
         <footer class="mt-auto text-white-50">
+          <p>&copy; 2022 YelpCamp</p>
+        </footer>
+      </div>
+    </div> -->
+
+    <div class="whole-body">
+      <div class="content inner-body">
+        <header>
+          <div class="inside-nav">
+            <h3 class="logo">YelpCamp</h3>
+            <nav class="links">
+              <a
+                class="link active d-none d-md-inline"
+                aria-current="page"
+                href="#"
+                >Home</a
+              >
+              <a class="link d-none d-md-inline" href="/campgrounds"
+                >Campgrounds</a
+              >
+              <% if(!currentUser) { %>
+              <a class="link" href="/login">Login</a>
+              <a class="link" href="/register">Register</a>
+              <% } else { %>
+              <a class="link" href="/logout">Logout</a>
+              <% } %>
+            </nav>
+          </div>
+        </header>
+        <main class="px-3">
+          <h1 class="mb-4">YelpCamp</h1>
+          <p class="lead mb-4">
+            Welcome to YelpCamp! <br />
+            Jump right in and explore our many campgrounds. <br />
+            Feel free to share some of your own and comment on others!
+          </p>
+          <a href="/campgrounds" class="button mt-2">View Campgrounds</a>
+        </main>
+
+        <footer class="text-white-50">
           <p>&copy; 2022 YelpCamp</p>
         </footer>
       </div>
