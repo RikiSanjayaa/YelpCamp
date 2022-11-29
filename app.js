@@ -10,20 +10,17 @@ const ejsMate = require('ejs-mate');
 const session = require('express-session')
 const methodOverride = require('method-override');
 const flash = require('connect-flash')
-const ExpressError = require('./utilities/ExpressError')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
-const User = require('./models/user')
-
 const helmet = require('helmet');
-
 const mongoSanitize = require('express-mongo-sanitize')
+const MongoDBStore = require('connect-mongodb-session')(session)
 
+const ExpressError = require('./utilities/ExpressError')
+const User = require('./models/user')
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
-
-const MongoDBStore = require('connect-mongodb-session')(session)
 
 // const dbUrl = process.env.DB_URL
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'
