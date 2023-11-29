@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 // require('dotenv').config()
 
 const express = require('express');
+const favicon = require('serve-favicon')
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
@@ -26,7 +27,7 @@ const reviewRoutes = require('./routes/reviews')
 const MongoDBStore = require('connect-mongodb-session')(session)
 
 // const dbUrl = process.env.DB_URL
-const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'
+const dbUrl = process.env.DB_URL
 // 'mongodb://localhost:27017/yelp-camp'
 
 // mongoose.connect(dbUrl, {
@@ -37,18 +38,18 @@ const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'
 // });
 const connectDB = async () => {
     try {
-      const conn = await mongoose.connect(dbUrl, {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false
-      });
-      console.log(`MongoDB Connected: ${conn.connection.host}`);
+        const conn = await mongoose.connect(dbUrl, {
+            useNewUrlParser: true,
+            useCreateIndex: true,
+            useUnifiedTopology: true,
+            useFindAndModify: false
+        });
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
-      console.log(error);
-      process.exit(1);
+        console.log(error);
+        process.exit(1);
     }
-  }
+}
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -57,6 +58,7 @@ db.once("open", () => {
 });
 
 const app = express();
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
