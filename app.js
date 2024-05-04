@@ -1,7 +1,6 @@
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config()
 }
-// require('dotenv').config()
 
 const express = require('express');
 const favicon = require('serve-favicon')
@@ -23,24 +22,11 @@ const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
 
-// const dbUrl = process.env.DB_URL
 const dbUrl = process.env.DB_URL
-// 'mongodb://localhost:27017/yelp-camp'
 
-// mongoose.connect(dbUrl, {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false
-// });
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect(dbUrl, {
-            useNewUrlParser: true,
-            useCreateIndex: true,
-            useUnifiedTopology: true,
-            useFindAndModify: false
-        });
+        const conn = await mongoose.connect(dbUrl);
         console.log(`MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
         console.log(error);
@@ -140,7 +126,6 @@ passport.deserializeUser(User.deserializeUser())
 
 app.use((req, res, next) => {
     if (!['/login', '/register', '/'].includes(req.originalUrl)) {
-        // console.log(`req.originalUrl = ${req.originalUrl}`);
         req.session.returnTo = req.originalUrl;
     }
     res.locals.currentUser = req.user
